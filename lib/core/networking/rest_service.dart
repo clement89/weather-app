@@ -25,7 +25,7 @@ class RestService {
     logService.logInfo('GET --------- ${_baseUrl + url}');
     Map<String, String> header0 = await _getAuthHeader();
     try {
-      http.Response response = await http.get(
+      final response = await http.get(
         Uri.parse(_baseUrl + url),
         headers: {
           ...header0,
@@ -38,17 +38,12 @@ class RestService {
 
       logService.logInfo('statue code --- ${response.statusCode}');
 
-      // logService.logInfo('data --- ${response.body}');
-
       if (response.statusCode == 200) {
-        // var data = json.decode(response.body.toString()) as dynamic;
-
         if (response.body.isEmpty) {
           return ApiResponse(isError: false, data: response.body);
         }
 
         var data = json.decode(utf8.decode(response.bodyBytes)) as dynamic;
-
         return ApiResponse(isError: false, data: data);
       } else {
         String msg = '';
@@ -56,7 +51,7 @@ class RestService {
           var data = json.decode(utf8.decode(response.bodyBytes)) as dynamic;
           msg = data['message'] ?? 'Error getting response from server';
         } catch (e) {
-          // dPrint('Error - > $e');
+          msg = 'Error getting response from server';
         }
         return ApiResponse(
           isError: true,

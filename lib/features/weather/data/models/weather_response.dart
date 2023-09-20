@@ -11,10 +11,14 @@ class WeatherResponse {
   });
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
-    return WeatherResponse(
-      location: Location.fromJson(json['location']),
-      current: Current.fromJson(json['current']),
-    );
+    try {
+      return WeatherResponse(
+        location: Location.fromJson(json['location']),
+        current: Current.fromJson(json['current']),
+      );
+    } catch (e) {
+      return WeatherResponse.empty();
+    }
   }
   factory WeatherResponse.empty() {
     return WeatherResponse(

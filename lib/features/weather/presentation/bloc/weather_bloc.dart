@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/logs/log_service.dart';
 import 'package:weather/core/models/app_error.dart';
 import 'package:weather/di/injection_container.dart';
+import 'package:weather/env/env.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 import 'package:weather/features/weather/domain/weather_repo.dart';
 
@@ -29,6 +30,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final res = await repo.getCurrentWeather(
         latitude: event.latitude,
         longitude: event.longitude,
+        apiKey: Env.key,
       );
       res.fold(
         (l) {

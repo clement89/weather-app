@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:weather/core/models/app_error.dart';
 import 'package:weather/core/networking/rest_service.dart';
-import 'package:weather/env/env.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 import 'package:weather/features/weather/data/weather_repo_impl.dart';
 
@@ -61,44 +60,50 @@ void main() {
       }
     };
 
+    test('getCurrentWeather returns weather', () async {
+      // Arrange
+      when(() {
+        return mockRestService.getDataFromServer(
+            url: '/current.json?q=1.0,2.0&key=xxx', header: {});
+      }).thenAnswer((_) async {
+        return ApiResponse(isError: false, data: mockResponse);
+      });
+
+      verifyNever(() => mockRestService.getDataFromServer(
+          url: '/current.json?q=1.0,2.0&key=xxx', header: {}));
+      // Act
+      final result = await weatherRepo.getCurrentWeather(
+        latitude: 1.0,
+        longitude: 2.0,
+        apiKey: 'xxx',
+      );
+      print('Result: $result');
+
+      // Assert
+      expect(
+        result,
+        const TypeMatcher<Right<AppError, WeatherResponse>>(),
+      );
+    });
+
     test('getCurrentWeather handles errors', () async {
       // Arrange
       when(
         () => mockRestService.getDataFromServer(
-            url: '/current.json?q=1.0,2.0&key=${Env.key}', header: {}),
+            url: '/current.json?q=1.0,2.0&key=xxx', header: {}),
       ).thenAnswer((_) async => ApiResponse(isError: true, data: {}));
 
       // Act
       final result = await weatherRepo.getCurrentWeather(
-        latitude: 9.796600,
-        longitude: 76.482231,
+        latitude: 1.0,
+        longitude: 2.0,
+        apiKey: 'xxx',
       );
 
       // Assert
       expect(
         result,
         const TypeMatcher<Left<AppError, WeatherResponse>>(),
-      );
-    });
-
-    test('getCurrentWeather returns weather', () async {
-      // Arrange
-      when(
-        () => mockRestService.getDataFromServer(
-            url: '/current.json?q=1.0,2.0&key=${Env.key}', header: {}),
-      ).thenAnswer((_) async =>
-          Future.value(ApiResponse(isError: false, data: mockResponse)));
-
-      // Act
-      final result = await weatherRepo.getCurrentWeather(
-        latitude: 9.796600,
-        longitude: 76.482231,
-      );
-
-      // Assert
-      expect(
-        result,
-        const TypeMatcher<Right<AppError, WeatherResponse>>(),
       );
     });
   });

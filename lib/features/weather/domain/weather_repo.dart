@@ -6,5 +6,6 @@ abstract class WeatherRepo {
   Future<Either<AppError, WeatherResponse>> getCurrentWeather({
     required double latitude,
     required double longitude,
+    required String apiKey,
   });
 }
