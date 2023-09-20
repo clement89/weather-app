@@ -7,7 +7,7 @@ import 'package:weather/di/injection_container.dart';
 
 class RestService {
   final int timeOut = 20;
-  static const _baseUrl = 'http://api.weatherapi.com/v1';
+  static const _baseUrl = 'https://api.weatherapi.com/v1';
 
   Future<Map<String, String>> _getAuthHeader() async {
     return {

@@ -22,7 +22,23 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     GetWeatherForLocation event,
     Emitter<WeatherState> emit,
   ) async {
-    try {} catch (error) {
+    try {
+      emit(state.copyWith(
+        status: Status.loading,
+      ));
+      final res = await repo.getCurrentWeather(
+        latitude: event.latitude,
+        longitude: event.longitude,
+      );
+      res.fold(
+        (l) {
+          emit(state.copyWith(status: Status.error, error: l));
+        },
+        (r) {
+          logService.logInfo('Got here');
+        },
+      );
+    } catch (error) {
       logService.logError(error.toString());
     }
   }

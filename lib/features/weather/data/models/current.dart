@@ -19,7 +19,7 @@ class Current {
   final double feelslike_f;
   final double vis_km;
   final double vis_miles;
-  final int uv;
+  final double uv;
   final double gust_mph;
   final double gust_kph;
 
