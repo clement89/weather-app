@@ -13,21 +13,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    return MultiBlocProvider(
-      providers: [],
-      child: ScreenUtilInit(
-        designSize: const Size(430, 932),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Weather',
-            theme: isDarkMode ? AppTheme.dark : AppTheme.light,
-            routerConfig: _appRouter.config(),
-          );
-        },
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(430, 932),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Weather',
+          theme: isDarkMode ? AppTheme.dark : AppTheme.light,
+          routerConfig: _appRouter.config(),
+        );
+      },
     );
   }
 }
