@@ -3,7 +3,7 @@ import 'package:weather/core/models/app_error.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 
 abstract class WeatherRepo {
-  Future<Either<AppError, List<WeatherResponse>>> getCurrentWeather({
+  Future<Either<AppError, WeatherResponse>> getCurrentWeather({
     required double latitude,
     required double longitude,
   });
