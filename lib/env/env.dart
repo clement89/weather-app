@@ -4,5 +4,5 @@ part 'env.g.dart';
 @Envied(path: '.env')
 abstract class Env {
   @EnviedField(varName: 'KEY', obfuscate: true)
-  static const String key = _Env.key;
+  static String key = _Env.key;
 }
