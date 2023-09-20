@@ -31,4 +31,17 @@ class Location {
       localtime: json['localtime'],
     );
   }
+
+  factory Location.empty() {
+    return Location(
+      name: '',
+      region: '',
+      country: '',
+      lat: 0.0,
+      lon: 0.0,
+      tz_id: '',
+      localtime_epoch: 0,
+      localtime: '',
+    );
+  }
 }

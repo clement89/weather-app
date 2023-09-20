@@ -16,4 +16,10 @@ class WeatherResponse {
       current: Current.fromJson(json['current']),
     );
   }
+  factory WeatherResponse.empty() {
+    return WeatherResponse(
+      location: Location.empty(),
+      current: Current.empty(),
+    );
+  }
 }
