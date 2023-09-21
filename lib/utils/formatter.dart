@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 class Formatter {
   static String formatDate(String dateString) {
-    final outputFormat = DateFormat.yMMMd();
+    final outputFormat = DateFormat.MMMEd();
 
     try {
       final parsedDate = DateTime.parse(dateString);
