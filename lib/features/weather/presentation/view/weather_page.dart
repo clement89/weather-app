@@ -8,6 +8,7 @@ import 'package:weather/di/injection_container.dart';
 import 'package:weather/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather/features/weather/presentation/widgets/current_weather.dart';
 import 'package:weather/features/weather/presentation/widgets/forecast_view.dart';
+import 'package:weather/router/app_router.gr.dart';
 import 'package:weather/widgets/custom_loader.dart';
 
 @RoutePage()
@@ -57,7 +58,18 @@ class _WeatherPageState extends State<WeatherPage> {
     final theme = Theme.of(context); // Get the current theme
 
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text('Weather App'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                final router = AutoRouter.of(context);
+                router.push(const SettingsRoute());
+              },
+            ),
+          ],
+        ),
         body: Container(
           color: theme.scaffoldBackgroundColor,
           child: BlocBuilder<WeatherBloc, WeatherState>(

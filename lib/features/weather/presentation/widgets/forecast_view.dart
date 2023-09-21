@@ -12,6 +12,7 @@ class ForecastView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (forecastList.isEmpty) return const SizedBox.shrink();
     return SizedBox(
       height: 0.40.sh,
       child: Column(

@@ -7,4 +7,5 @@ class AppColors {
   static const Color appBarDark = Color(0XFF451952);
   static const Color filterColor = Color(0XFFFFEEF4);
   static const Color headerColor = Color(0XFF9F0D7F);
+  static const Color green = Color(0XFF557A46);
 }
