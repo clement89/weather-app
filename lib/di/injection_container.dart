@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:weather/core/location/location_service.dart';
 import 'package:weather/core/logs/log_service.dart';
 import 'package:weather/core/networking/rest_service.dart';
 import 'package:weather/features/weather/data/weather_repo_impl.dart';
@@ -10,6 +11,7 @@ Future<void> setupInjection() async {
   serviceLocator
     ..registerLazySingleton<LogService>(() => LogService())
     ..registerLazySingleton<RestService>(() => RestService())
+    ..registerLazySingleton<LocationService>(() => LocationService())
     ..registerLazySingleton<WeatherRepo>(
       () => WeatherRepoImpl(
         restService: serviceLocator(),
