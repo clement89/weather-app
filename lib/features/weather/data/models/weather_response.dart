@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:weather/features/weather/data/models/current.dart';
 import 'package:weather/features/weather/data/models/location.dart';
 
-class WeatherResponse {
+class WeatherResponse extends Equatable {
   final Location location;
   final Current current;
 
-  WeatherResponse({
+  const WeatherResponse({
     required this.location,
     required this.current,
   });
@@ -26,4 +27,6 @@ class WeatherResponse {
       current: Current.empty(),
     );
   }
+  @override
+  List<Object?> get props => [location, current];
 }

@@ -34,12 +34,14 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final res = event.isFromCity
           ? await repo.getCurrentWeather(
               city: event.city!,
-              apiKey: Env.key,
+              // apiKey: Env.key,
+              apiKey: 'xxx',
             )
           : await repo.getCurrentWeather(
               latitude: event.latitude!,
               longitude: event.longitude!,
-              apiKey: Env.key,
+              // apiKey: Env.key,
+              apiKey: 'xxx',
             );
       res.fold(
         (l) {

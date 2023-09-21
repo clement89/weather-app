@@ -32,26 +32,40 @@ class HistoryTile extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             SizedBox(width: 20.sp),
-            BlocBuilder<SettingsCubit, SettingsState>(
-              builder: (context, state) {
-                return Row(
-                  children: [
-                    Text(
-                      'Feeling: ',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    Text(
-                      state.unit == WeatherUnit.celsius
-                          ? '${hour.feelslikeC.toStringAsFixed(1)}°C'
-                          : '${hour.feelslikeC.toStringAsFixed(1)}°F',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                );
-              },
+            Expanded(
+              child: BlocBuilder<SettingsCubit, SettingsState>(
+                builder: (context, state) {
+                  return Row(
+                    children: [
+                      Text(
+                        'Feeling: ',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Text(
+                        state.unit == WeatherUnit.celsius
+                            ? '${hour.feelslikeC.toStringAsFixed(1)}°C'
+                            : '${hour.feelslikeC.toStringAsFixed(1)}°F',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Text('Humidity',
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  Text(
+                    '${hour.humidity}%',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

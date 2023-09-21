@@ -63,8 +63,8 @@ class WeatherState extends Equatable {
         longitude,
         city,
         status,
-        forecastList,
         weather,
+        forecastList,
         history,
         error,
       ];

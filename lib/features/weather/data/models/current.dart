@@ -1,4 +1,6 @@
-class Current {
+import 'package:equatable/equatable.dart';
+
+class Current extends Equatable {
   final int last_updated_epoch;
   final String last_updated;
   final double temp_c;
@@ -103,9 +105,38 @@ class Current {
       gust_kph: 0.0,
     );
   }
+
+  @override
+  List<Object?> get props {
+    return [
+      last_updated_epoch,
+      last_updated,
+      temp_c,
+      temp_f,
+      is_day,
+      condition,
+      wind_mph,
+      wind_kph,
+      wind_degree,
+      wind_dir,
+      pressure_mb,
+      pressure_in,
+      precip_mm,
+      precip_in,
+      humidity,
+      cloud,
+      feelslike_c,
+      feelslike_f,
+      vis_km,
+      vis_miles,
+      uv,
+      gust_mph,
+      gust_kph,
+    ];
+  }
 }
 
-class Condition {
+class Condition extends Equatable {
   final String text;
   final String icon;
   final int code;
@@ -129,5 +160,14 @@ class Condition {
       icon: '',
       code: 0,
     );
+  }
+
+  @override
+  List<Object?> get props {
+    return [
+      text,
+      icon,
+      code,
+    ];
   }
 }
