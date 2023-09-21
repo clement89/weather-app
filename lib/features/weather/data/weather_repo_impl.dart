@@ -32,4 +32,27 @@ class WeatherRepoImpl implements WeatherRepo {
       return Left(AppError(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<AppError, WeatherResponse>> getWeatherForecast({
+    required double latitude,
+    required double longitude,
+    required String apiKey,
+  }) async {
+    try {
+      final res = await restService.getDataFromServer(
+        url: '/forecast.json?q=$latitude,$longitude&days=3&key=$apiKey',
+        header: {},
+      );
+      if (res.isError) {
+        return const Left(
+            AppError(message: 'Failed to get characters from server'));
+      } else {
+        final WeatherResponse response = WeatherResponse.fromJson(res.data);
+        return Right(response);
+      }
+    } catch (e) {
+      return Left(AppError(message: e.toString()));
+    }
+  }
 }

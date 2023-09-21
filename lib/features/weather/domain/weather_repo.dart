@@ -8,4 +8,10 @@ abstract class WeatherRepo {
     required double longitude,
     required String apiKey,
   });
+
+  Future<Either<AppError, WeatherResponse>> getWeatherForecast({
+    required double latitude,
+    required double longitude,
+    required String apiKey,
+  });
 }

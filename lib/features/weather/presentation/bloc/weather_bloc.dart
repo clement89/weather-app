@@ -17,6 +17,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
   WeatherBloc({required this.repo}) : super(WeatherState.initial()) {
     on<GetWeatherForLocation>(_getWeatherForLocation);
+    on<GetWeatherForecast>(_getWeatherForecast);
   }
 
   Future<void> _getWeatherForLocation(
@@ -28,6 +29,32 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         status: Status.loading,
       ));
       final res = await repo.getCurrentWeather(
+        latitude: event.latitude,
+        longitude: event.longitude,
+        apiKey: Env.key,
+      );
+      res.fold(
+        (l) {
+          emit(state.copyWith(status: Status.error, error: l));
+        },
+        (r) {
+          emit(state.copyWith(status: Status.loaded, weather: r));
+        },
+      );
+    } catch (error) {
+      logService.logError(error.toString());
+    }
+  }
+
+  Future<void> _getWeatherForecast(
+    GetWeatherForecast event,
+    Emitter<WeatherState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(
+        status: Status.loading,
+      ));
+      final res = await repo.getWeatherForecast(
         latitude: event.latitude,
         longitude: event.longitude,
         apiKey: Env.key,

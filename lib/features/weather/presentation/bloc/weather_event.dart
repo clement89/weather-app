@@ -15,3 +15,12 @@ class GetWeatherForLocation extends WeatherEvent {
     required this.longitude,
   });
 }
+
+class GetWeatherForecast extends WeatherEvent {
+  final double latitude;
+  final double longitude;
+  const GetWeatherForecast({
+    required this.latitude,
+    required this.longitude,
+  });
+}
