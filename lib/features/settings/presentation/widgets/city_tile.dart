@@ -32,7 +32,7 @@ class _CityTileState extends State<CityTile> {
   Widget build(BuildContext context) {
     return ListTile(
       title: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.sp),
+        padding: EdgeInsets.symmetric(vertical: 20.sp),
         child: isEditing
             ? TextField(
                 controller: _textEditingController,

@@ -29,3 +29,10 @@ class GetWeatherForecast extends WeatherEvent {
     required this.longitude,
   });
 }
+
+class GetWeatherHistory extends WeatherEvent {
+  final String date;
+  const GetWeatherHistory({
+    required this.date,
+  });
+}

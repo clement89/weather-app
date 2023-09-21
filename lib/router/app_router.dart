@@ -8,5 +8,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(page: WeatherRoute.page),
         AutoRoute(page: SettingsRoute.page),
+        AutoRoute(page: HistoryRoute.page),
       ];
 }
