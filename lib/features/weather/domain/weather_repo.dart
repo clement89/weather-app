@@ -5,14 +5,16 @@ import 'package:weather/features/weather/data/models/weather_response.dart';
 
 abstract class WeatherRepo {
   Future<Either<AppError, WeatherResponse>> getCurrentWeather({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     required String apiKey,
+    String? city,
   });
 
   Future<Either<AppError, List<Forecast>>> getWeatherForecast({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     required String apiKey,
+    String? city,
   });
 }

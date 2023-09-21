@@ -30,10 +30,10 @@ class _WeatherPageState extends State<WeatherPage> {
     final locationService = serviceLocator<LocationService>();
     locationService.fetchLocation(
       onSuccess: (Position position) {
-        _bloc.add(GetWeatherForLocation(
-          latitude: position.latitude,
-          longitude: position.longitude,
-        ));
+        _bloc.add(GetCurrentWeather(
+            latitude: position.latitude,
+            longitude: position.longitude,
+            isFromCity: false));
 
         _bloc.add(GetWeatherForecast(
           latitude: position.latitude,
@@ -41,9 +41,10 @@ class _WeatherPageState extends State<WeatherPage> {
         ));
       },
       onFailure: (FailureType type, String? message) {
-        _bloc.add(const GetWeatherForLocation(
+        _bloc.add(const GetCurrentWeather(
           latitude: 9.796600,
           longitude: 76.482231,
+          isFromCity: false,
         ));
         _bloc.add(const GetWeatherForecast(
           latitude: 9.796600,
@@ -59,7 +60,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Weather App'),
+          title: const Text('Weather'),
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),

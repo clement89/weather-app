@@ -37,8 +37,7 @@ class SettingsPage extends StatelessWidget {
                   return BlocBuilder<WeatherBloc, WeatherState>(
                     builder: (context, state) {
                       return CityTile(
-                        initialText:
-                            '${state.weather.location.name}, ${state.weather.location.country}',
+                        initialText: state.city,
                       );
                     },
                   );

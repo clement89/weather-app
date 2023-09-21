@@ -7,12 +7,17 @@ sealed class WeatherEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetWeatherForLocation extends WeatherEvent {
-  final double latitude;
-  final double longitude;
-  const GetWeatherForLocation({
-    required this.latitude,
-    required this.longitude,
+class GetCurrentWeather extends WeatherEvent {
+  final bool isFromCity;
+  final double? latitude;
+  final double? longitude;
+  final String? city;
+
+  const GetCurrentWeather({
+    required this.isFromCity,
+    this.latitude,
+    this.longitude,
+    this.city,
   });
 }
 

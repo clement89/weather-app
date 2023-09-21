@@ -13,13 +13,18 @@ class WeatherRepoImpl implements WeatherRepo {
 
   @override
   Future<Either<AppError, WeatherResponse>> getCurrentWeather({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     required String apiKey,
+    String? city,
   }) async {
     try {
+      String query = '$latitude,$longitude';
+      if (city != null) {
+        query = city;
+      }
       final res = await restService.getDataFromServer(
-        url: '/current.json?q=$latitude,$longitude&key=$apiKey',
+        url: '/current.json?q=$query&key=$apiKey',
         header: {},
       );
       if (res.isError) {
@@ -36,9 +41,10 @@ class WeatherRepoImpl implements WeatherRepo {
 
   @override
   Future<Either<AppError, List<Forecast>>> getWeatherForecast({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     required String apiKey,
+    String? city,
   }) async {
     try {
       final res = await restService.getDataFromServer(
