@@ -1,19 +1,19 @@
 import 'package:weather/features/weather/data/models/day.dart';
 
 class Forecast {
-  final String location;
-  final Day current;
+  final String date;
+  final Day day;
 
   Forecast({
-    required this.location,
-    required this.current,
+    required this.date,
+    required this.day,
   });
 
   factory Forecast.fromJson(Map<String, dynamic> json) {
     try {
       return Forecast(
-        location: json['date'],
-        current: Day.fromJson(json['day']),
+        date: json['date'],
+        day: Day.fromJson(json['day']),
       );
     } catch (e) {
       return Forecast.empty();
@@ -21,8 +21,8 @@ class Forecast {
   }
   factory Forecast.empty() {
     return Forecast(
-      location: '',
-      current: Day.empty(),
+      date: '',
+      day: Day.empty(),
     );
   }
 }

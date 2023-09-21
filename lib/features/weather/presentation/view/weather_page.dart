@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/core/location/location_service.dart';
 import 'package:weather/di/injection_container.dart';
 import 'package:weather/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather/features/weather/presentation/widgets/current_weather.dart';
+import 'package:weather/features/weather/presentation/widgets/forecast_view.dart';
 import 'package:weather/widgets/custom_loader.dart';
 
 @RoutePage()
@@ -55,22 +57,29 @@ class _WeatherPageState extends State<WeatherPage> {
     final theme = Theme.of(context); // Get the current theme
 
     return Scaffold(
+        appBar: AppBar(),
         body: Container(
-      color: theme.scaffoldBackgroundColor,
-      child: BlocBuilder<WeatherBloc, WeatherState>(
-        builder: (context, state) {
-          if (state.status == Status.loading) {
-            return const Center(
-              child: CustomLoader(),
-            );
-          } else if (state.status == Status.error) {
-            return Center(
-              child: Text(state.error.message),
-            );
-          }
-          return CurrentWeather(weather: state.weather);
-        },
-      ),
-    ));
+          color: theme.scaffoldBackgroundColor,
+          child: BlocBuilder<WeatherBloc, WeatherState>(
+            builder: (context, state) {
+              if (state.status == Status.loading) {
+                return const Center(
+                  child: CustomLoader(),
+                );
+              } else if (state.status == Status.error) {
+                return Center(
+                  child: Text(state.error.message),
+                );
+              }
+              return Column(
+                children: [
+                  CurrentWeather(weather: state.weather),
+                  SizedBox(height: 40.sp),
+                  ForecastView(forecastList: state.forecastList),
+                ],
+              );
+            },
+          ),
+        ));
   }
 }
