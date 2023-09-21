@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 
 class CurrentWeather extends StatelessWidget {
@@ -30,12 +32,19 @@ class CurrentWeather extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20.sp),
-          Text(
-            '${weather.current.temp_c}°C',
-            style: TextStyle(
-                fontSize: 48.sp,
-                fontWeight: FontWeight.bold,
-                color: theme.textTheme.titleLarge!.color),
+          BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, state) {
+              if (state.unit == WeatherUnit.celsius) {}
+              return Text(
+                state.unit == WeatherUnit.celsius
+                    ? '${weather.current.temp_c}°C'
+                    : '${weather.current.temp_f}°F',
+                style: TextStyle(
+                    fontSize: 48.sp,
+                    fontWeight: FontWeight.bold,
+                    color: theme.textTheme.titleLarge!.color),
+              );
+            },
           ),
           SizedBox(height: 20.sp),
           Text(

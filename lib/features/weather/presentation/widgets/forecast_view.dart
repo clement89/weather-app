@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/utils/formatter.dart';
 
@@ -40,36 +42,40 @@ class ForecastView extends StatelessWidget {
                         SizedBox(width: 20.sp),
                         Text(Formatter.formatDate(forecast.date)),
                         SizedBox(width: 20.sp),
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'High: ',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                              TextSpan(
-                                text:
-                                    '${forecast.day.maxTempC.toStringAsFixed(1)}°C',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              TextSpan(
-                                text: ' / Low: ',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                              TextSpan(
-                                text:
-                                    '${forecast.day.minTempC.toStringAsFixed(1)}°C',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        )
+                        BlocBuilder<SettingsCubit, SettingsState>(
+                          builder: (context, state) {
+                            return Row(
+                              children: [
+                                Text(
+                                  'High: ',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                Text(
+                                  state.unit == WeatherUnit.celsius
+                                      ? '${forecast.day.maxTempC.toStringAsFixed(1)}°C'
+                                      : '${forecast.day.maxTempF.toStringAsFixed(1)}°F',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  ' - Low: ',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                Text(
+                                  state.unit == WeatherUnit.celsius
+                                      ? '${forecast.day.minTempC.toStringAsFixed(1)}°C'
+                                      : '${forecast.day.minTempF.toStringAsFixed(1)}°F',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

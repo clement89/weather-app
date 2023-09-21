@@ -85,6 +85,7 @@ class _WeatherPageState extends State<WeatherPage> {
               }
               return Column(
                 children: [
+                  SizedBox(height: 40.sp),
                   CurrentWeather(weather: state.weather),
                   SizedBox(height: 40.sp),
                   ForecastView(forecastList: state.forecastList),
