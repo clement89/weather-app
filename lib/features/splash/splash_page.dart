@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather/features/weather/presentation/view/weather_page.dart';
 import 'package:weather/router/app_router.gr.dart';
 import 'package:weather/utils/asset_paths.dart';
 
