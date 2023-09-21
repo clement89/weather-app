@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:weather/core/models/app_error.dart';
 import 'package:weather/core/networking/rest_service.dart';
+import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 import 'package:weather/features/weather/domain/weather_repo.dart';
 
@@ -34,7 +35,7 @@ class WeatherRepoImpl implements WeatherRepo {
   }
 
   @override
-  Future<Either<AppError, WeatherResponse>> getWeatherForecast({
+  Future<Either<AppError, Forecast>> getWeatherForecast({
     required double latitude,
     required double longitude,
     required String apiKey,
@@ -48,7 +49,7 @@ class WeatherRepoImpl implements WeatherRepo {
         return const Left(
             AppError(message: 'Failed to get characters from server'));
       } else {
-        final WeatherResponse response = WeatherResponse.fromJson(res.data);
+        final Forecast response = Forecast.fromJson(res.data);
         return Right(response);
       }
     } catch (e) {

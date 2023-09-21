@@ -5,6 +5,7 @@ import 'package:weather/core/logs/log_service.dart';
 import 'package:weather/core/models/app_error.dart';
 import 'package:weather/di/injection_container.dart';
 import 'package:weather/env/env.dart';
+import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 import 'package:weather/features/weather/domain/weather_repo.dart';
 
@@ -64,7 +65,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           emit(state.copyWith(status: Status.error, error: l));
         },
         (r) {
-          emit(state.copyWith(status: Status.loaded, weather: r));
+          emit(state.copyWith(status: Status.loaded, forecast: r));
         },
       );
     } catch (error) {

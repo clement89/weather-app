@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:weather/core/models/app_error.dart';
+import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 
 abstract class WeatherRepo {
@@ -9,7 +10,7 @@ abstract class WeatherRepo {
     required String apiKey,
   });
 
-  Future<Either<AppError, WeatherResponse>> getWeatherForecast({
+  Future<Either<AppError, Forecast>> getWeatherForecast({
     required double latitude,
     required double longitude,
     required String apiKey,
