@@ -35,7 +35,7 @@ class WeatherRepoImpl implements WeatherRepo {
   }
 
   @override
-  Future<Either<AppError, Forecast>> getWeatherForecast({
+  Future<Either<AppError, List<Forecast>>> getWeatherForecast({
     required double latitude,
     required double longitude,
     required String apiKey,
@@ -49,8 +49,14 @@ class WeatherRepoImpl implements WeatherRepo {
         return const Left(
             AppError(message: 'Failed to get characters from server'));
       } else {
-        final Forecast response = Forecast.fromJson(res.data);
-        return Right(response);
+        List<Forecast> forecastList = [];
+        final forecastData = res.data['forecast'];
+        List<dynamic> forecastDay = forecastData['forecastday'];
+        for (var forecast in forecastDay) {
+          forecastList.add(Forecast.fromJson(forecast));
+        }
+
+        return Right(forecastList);
       }
     } catch (e) {
       return Left(AppError(message: e.toString()));

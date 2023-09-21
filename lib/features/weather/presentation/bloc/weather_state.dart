@@ -7,7 +7,7 @@ class WeatherState extends Equatable {
   final String city;
   final Status status;
   final WeatherResponse weather;
-  final Forecast forecast;
+  final List<Forecast> forecastList;
   final AppError error;
 
   const WeatherState({
@@ -16,7 +16,7 @@ class WeatherState extends Equatable {
     required this.city,
     required this.status,
     required this.weather,
-    required this.forecast,
+    required this.forecastList,
     required this.error,
   });
 
@@ -27,7 +27,7 @@ class WeatherState extends Equatable {
       city: '',
       status: Status.initial,
       weather: WeatherResponse.empty(),
-      forecast: Forecast.empty(),
+      forecastList: const [],
       error: AppError.empty(),
     );
   }
@@ -38,7 +38,7 @@ class WeatherState extends Equatable {
     String? city,
     Status? status,
     WeatherResponse? weather,
-    Forecast? forecast,
+    List<Forecast>? forecastList,
     AppError? error,
   }) {
     return WeatherState(
@@ -47,7 +47,7 @@ class WeatherState extends Equatable {
       city: city ?? this.city,
       status: status ?? this.status,
       weather: weather ?? this.weather,
-      forecast: forecast ?? this.forecast,
+      forecastList: forecastList ?? this.forecastList,
       error: error ?? this.error,
     );
   }
@@ -58,7 +58,7 @@ class WeatherState extends Equatable {
         longitude,
         city,
         status,
-        forecast,
+        forecastList,
         weather,
         error,
       ];
