@@ -14,8 +14,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
     return MultiBlocProvider(
       providers: [
         BlocProvider<WeatherBloc>(
@@ -32,11 +30,17 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Weather',
-            theme: isDarkMode ? AppTheme.dark : AppTheme.light,
-            routerConfig: _appRouter.config(),
+          return BlocBuilder<SettingsCubit, SettingsState>(
+            buildWhen: (previous, current) =>
+                previous.isDarkMode != current.isDarkMode,
+            builder: (context, state) {
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                title: 'Weather',
+                theme: state.isDarkMode ? AppTheme.dark : AppTheme.light,
+                routerConfig: _appRouter.config(),
+              );
+            },
           );
         },
       ),
