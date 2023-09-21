@@ -6,6 +6,7 @@ import 'package:weather/core/models/app_error.dart';
 import 'package:weather/di/injection_container.dart';
 import 'package:weather/env/env.dart';
 import 'package:weather/features/weather/data/models/forecast.dart';
+import 'package:weather/features/weather/data/models/hour.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 import 'package:weather/features/weather/domain/weather_repo.dart';
 
@@ -18,8 +19,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
   WeatherBloc({required this.repo}) : super(WeatherState.initial()) {
     on<GetCurrentWeather>(_getWeatherForLocation);
-
     on<GetWeatherForecast>(_getWeatherForecast);
+    on<GetWeatherHistory>(_getWeatherHistory);
   }
 
   Future<void> _getWeatherForLocation(
@@ -76,6 +77,40 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         },
         (r) {
           emit(state.copyWith(status: Status.loaded, forecastList: r));
+        },
+      );
+    } catch (error) {
+      logService.logError(error.toString());
+    }
+  }
+
+  Future<void> _getWeatherHistory(
+    GetWeatherHistory event,
+    Emitter<WeatherState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(
+        status: Status.loading,
+      ));
+
+      final res = state.city.isEmpty
+          ? await repo.getWeatherHistory(
+              latitude: state.latitude,
+              longitude: state.longitude,
+              apiKey: Env.key,
+              date: event.date,
+            )
+          : await repo.getWeatherHistory(
+              city: state.city,
+              apiKey: Env.key,
+              date: event.date,
+            );
+      res.fold(
+        (l) {
+          emit(state.copyWith(status: Status.error, error: l));
+        },
+        (r) {
+          emit(state.copyWith(status: Status.loaded, history: r));
         },
       );
     } catch (error) {

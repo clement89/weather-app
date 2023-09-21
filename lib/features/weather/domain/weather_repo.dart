@@ -20,9 +20,10 @@ abstract class WeatherRepo {
   });
 
   Future<Either<AppError, List<Hour>>> getWeatherHistory({
-    required double latitude,
-    required double longitude,
+    double? latitude,
+    double? longitude,
     required String apiKey,
+    String? city,
     required String date,
   });
 }
