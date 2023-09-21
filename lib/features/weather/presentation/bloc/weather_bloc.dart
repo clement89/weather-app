@@ -37,7 +37,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           emit(state.copyWith(status: Status.error, error: l));
         },
         (r) {
-          logService.logInfo('Got here');
+          emit(state.copyWith(status: Status.loaded, weather: r));
         },
       );
     } catch (error) {
