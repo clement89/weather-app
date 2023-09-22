@@ -19,6 +19,6 @@ class AppError extends Equatable {
 
   @override
   String toString() {
-    return "Error: $message";
+    return 'Error: $message';
   }
 }
