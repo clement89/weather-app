@@ -25,7 +25,7 @@ class Current extends Equatable {
   final double gust_mph;
   final double gust_kph;
 
-  Current({
+  const Current({
     required this.last_updated_epoch,
     required this.last_updated,
     required this.temp_c,
@@ -141,7 +141,7 @@ class Condition extends Equatable {
   final String icon;
   final int code;
 
-  Condition({
+  const Condition({
     required this.text,
     required this.icon,
     required this.code,
@@ -155,7 +155,7 @@ class Condition extends Equatable {
     );
   }
   factory Condition.empty() {
-    return Condition(
+    return const Condition(
       text: '',
       icon: '',
       code: 0,

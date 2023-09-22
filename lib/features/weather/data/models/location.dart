@@ -10,7 +10,7 @@ class Location extends Equatable {
   final int localtime_epoch;
   final String localtime;
 
-  Location({
+  const Location({
     required this.name,
     required this.region,
     required this.country,
@@ -35,7 +35,7 @@ class Location extends Equatable {
   }
 
   factory Location.empty() {
-    return Location(
+    return const Location(
       name: '',
       region: '',
       country: '',
