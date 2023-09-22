@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/logs/log_service.dart';
 import 'package:weather/core/models/app_error.dart';
 import 'package:weather/di/injection_container.dart';
-import 'package:weather/env/env.dart';
 import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/features/weather/data/models/hour.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
@@ -16,8 +15,12 @@ part 'weather_state.dart';
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final logService = serviceLocator<LogService>();
   final WeatherRepo repo;
+  final String key;
 
-  WeatherBloc({required this.repo}) : super(WeatherState.initial()) {
+  WeatherBloc({
+    required this.repo,
+    required this.key,
+  }) : super(WeatherState.initial()) {
     on<GetCurrentWeather>(_getWeatherForLocation);
     on<GetWeatherForecast>(_getWeatherForecast);
     on<GetWeatherHistory>(_getWeatherHistory);
@@ -34,14 +37,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final res = event.isFromCity
           ? await repo.getCurrentWeather(
               city: event.city!,
-              // apiKey: Env.key,
-              apiKey: 'xxx',
+              apiKey: key,
             )
           : await repo.getCurrentWeather(
               latitude: event.latitude!,
               longitude: event.longitude!,
-              // apiKey: Env.key,
-              apiKey: 'xxx',
+              apiKey: key,
             );
       res.fold(
         (l) {
@@ -71,7 +72,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final res = await repo.getWeatherForecast(
         latitude: event.latitude,
         longitude: event.longitude,
-        apiKey: Env.key,
+        apiKey: key,
       );
       res.fold(
         (l) {
@@ -99,12 +100,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           ? await repo.getWeatherHistory(
               latitude: state.latitude,
               longitude: state.longitude,
-              apiKey: Env.key,
+              apiKey: key,
               date: event.date,
             )
           : await repo.getWeatherHistory(
               city: state.city,
-              apiKey: Env.key,
+              apiKey: key,
               date: event.date,
             );
       res.fold(

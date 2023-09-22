@@ -16,7 +16,7 @@ void main() {
   late WeatherRepo repo;
 
   group('GetCurrentWeather', () {
-    WeatherResponse response = WeatherResponse.fromJson({
+    WeatherResponse response = WeatherResponse.fromJson(const {
       "location": {
         "name": "Piravam",
         "region": "Kerala",
@@ -79,6 +79,7 @@ void main() {
       },
       build: () => WeatherBloc(
         repo: repo,
+        key: 'xxx',
       ),
       act: (bloc) => bloc.add(const GetCurrentWeather(
         latitude: 0.0,

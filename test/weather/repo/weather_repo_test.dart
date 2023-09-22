@@ -77,7 +77,6 @@ void main() {
         longitude: 2.0,
         apiKey: 'xxx',
       );
-      print('Result: $result');
 
       // Assert
       expect(
