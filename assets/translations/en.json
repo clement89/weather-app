@@ -4,5 +4,15 @@
     "wind":"Wind",
     "humidity":"Humidity",
     "precipitation":"Precipitation",
-    "days_forecast":"Days Forecast"
+    "days_forecast":"Days Forecast",
+    "heigh":"Heigh",
+    "low":"Low",
+    "feeling":"Feeling",
+    "unit":"Unit",
+    "city":"City",
+    "theme":"Theme",
+    "dark_mode":"Dark Mode",
+    "celsius": "Celsius",
+    "fahrenheit":"Fahrenheit"
+    
 }

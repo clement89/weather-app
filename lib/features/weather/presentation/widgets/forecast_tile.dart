@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/features/weather/presentation/bloc/weather_bloc.dart';
@@ -41,7 +42,7 @@ class ForecastTile extends StatelessWidget {
                   return Row(
                     children: [
                       Text(
-                        'High: ',
+                        '${Strings.heigh}: ',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(
@@ -54,7 +55,7 @@ class ForecastTile extends StatelessWidget {
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        ' - Low: ',
+                        ' - ${Strings.low}: ',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:weather/features/weather/data/models/hour.dart';
 import 'package:weather/utils/formatter.dart';
@@ -38,7 +39,7 @@ class HistoryTile extends StatelessWidget {
                   return Row(
                     children: [
                       Text(
-                        'Feeling: ',
+                        '${Strings.feeling}: ',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(
@@ -58,7 +59,7 @@ class HistoryTile extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Text('Humidity',
+                  Text(Strings.humidity,
                       style: Theme.of(context).textTheme.bodyMedium),
                   Text(
                     '${hour.humidity}%',

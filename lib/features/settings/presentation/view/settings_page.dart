@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:weather/features/settings/presentation/widgets/city_tile.dart';
 import 'package:weather/features/settings/presentation/widgets/section_tile.dart';
@@ -25,13 +26,13 @@ class SettingsPage extends StatelessWidget {
             itemBuilder: (context, index) {
               switch (index) {
                 case 0:
-                  return const SectionTile(title: 'Unit');
+                  return SectionTile(title: Strings.unit);
                 case 1:
                   return const UnitTile(unit: WeatherUnit.celsius);
                 case 2:
                   return const UnitTile(unit: WeatherUnit.fahrenheit);
                 case 4:
-                  return const SectionTile(title: 'City');
+                  return SectionTile(title: Strings.city);
 
                 case 5:
                   return BlocBuilder<WeatherBloc, WeatherState>(
@@ -42,7 +43,7 @@ class SettingsPage extends StatelessWidget {
                     },
                   );
                 case 6:
-                  return const SectionTile(title: 'Theme');
+                  return SectionTile(title: Strings.theme);
                 case 7:
                   return const ThemeTile();
                 default:

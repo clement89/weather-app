@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/features/weather/data/models/forecast.dart';
 import 'package:weather/features/weather/presentation/widgets/forecast_tile.dart';
 
@@ -18,7 +19,7 @@ class ForecastView extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            '3 Days Forecast',
+            '3 ${Strings.daysForecast}',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           Padding(

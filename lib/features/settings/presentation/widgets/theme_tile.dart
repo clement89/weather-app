@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 
 class ThemeTile extends StatefulWidget {
@@ -20,7 +21,7 @@ class _ThemeTileState extends State<ThemeTile> {
       padding: EdgeInsets.symmetric(vertical: 10.sp),
       child: ListTile(
           title: Text(
-            'Dark mode',
+            Strings.darkMode,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           trailing: BlocBuilder<SettingsCubit, SettingsState>(
