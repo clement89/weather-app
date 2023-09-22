@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:weather/features/weather/data/models/weather_response.dart';
 
@@ -57,7 +58,7 @@ class CurrentWeather extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text('Wind', style: theme.textTheme.bodyMedium),
+                  Text(Strings.wind, style: theme.textTheme.bodyMedium),
                   Text(
                     '${weather.current.wind_kph} km/h',
                     style: theme.textTheme.bodyLarge,
@@ -67,7 +68,7 @@ class CurrentWeather extends StatelessWidget {
               SizedBox(width: 20.w),
               Column(
                 children: [
-                  Text('Humidity', style: theme.textTheme.bodyMedium),
+                  Text(Strings.humidity, style: theme.textTheme.bodyMedium),
                   Text(
                     '${weather.current.humidity}%',
                     style: theme.textTheme.bodyLarge,
@@ -77,7 +78,8 @@ class CurrentWeather extends StatelessWidget {
               SizedBox(width: 20.w),
               Column(
                 children: [
-                  Text('Precipitation', style: theme.textTheme.bodyMedium),
+                  Text(Strings.precipitation,
+                      style: theme.textTheme.bodyMedium),
                   Text(
                     '${weather.current.precip_mm} mm',
                     style: theme.textTheme.bodyLarge,

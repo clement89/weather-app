@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/core/location/location_service.dart';
+import 'package:weather/core/strings/strings.dart';
 import 'package:weather/di/injection_container.dart';
 import 'package:weather/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather/features/weather/presentation/widgets/current_weather.dart';
@@ -60,7 +61,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Weather'),
+          title: Text(Strings.weather),
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),

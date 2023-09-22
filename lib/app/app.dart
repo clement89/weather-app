@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
                 previous.isDarkMode != current.isDarkMode,
             builder: (context, state) {
               return MaterialApp.router(
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
                 debugShowCheckedModeBanner: false,
                 title: 'Weather',
                 theme: state.isDarkMode ? AppTheme.dark : AppTheme.light,
